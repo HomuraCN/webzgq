@@ -1,0 +1,165 @@
+<!DOCTYPE html>  
+<html lang="en">  
+  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>星座鉴赏</title>  
+    <style type="text/css">  
+    
+
+    video{  
+            position: fixed;  
+            right: 0px;  
+            bottom: 0px;  
+            min-width: 100%;  
+            min-height: 100%;  
+            width: 100%;
+            height: 100%;  
+            object-fit: fill;
+            /*加滤镜*/
+            /*filter: blur(15px); //背景模糊设置 */
+            /*-webkit-filter: grayscale(100%);*/  
+            /*filter:grayscale(100%); //背景灰度设置*/  
+            z-index:-11;
+            
+        }  
+        #parent{
+            width:100%;
+            height:100%;
+        }
+        a{
+            opacity: 0.9;
+            text-decoration: none;
+            font-family: "隶书";
+            font-size: 20px;
+            color:rgb(255, 255, 255);
+           
+        }
+        a:hover{
+            color: rgb(192, 107, 157);
+        }      
+        #return{
+            position: fixed;
+            right: 0;
+            bottom: 0;
+           margin-right: 10px;
+           margin-bottom: 10px;
+        }
+        #pic{
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+        #inpic{
+            position: absolute;
+            top:20%;
+            left:30%;
+            text-align: center;
+            line-height: 20px;
+        }
+        
+    *{
+        margin: 0;
+        padding: 0;
+    }
+  
+          #prev{
+              margin-top: 20%;
+           float: left;
+           margin-left: 80px;
+    
+          }
+          #xz{width: 800px;  
+            height: 500px;  
+           
+         
+            padding: 20px;  
+            text-align: center;  
+              float: left;
+          }
+          #next{
+            margin-top: 20%;
+              float: left;
+          }
+          .box{ position: absolute;
+            transform: translate(-50%,-50%);
+            top:50%;
+            left: 50%;
+        width: 100%;
+    }
+    </style>  
+    <script>  
+        window.onload=function(){  
+       var prev=document.getElementById("prev");  
+       var next=document.getElementById("next");  
+       var img=document.getElementsByTagName("img")[0];  
+          
+       var imgArr=['./images/未命名作品(1).png',
+'./images/未命名作品(2).png',
+'./images/未命名作品(3).png',
+'./images/未命名作品(4).png',
+'./images/未命名作品(5).png',
+'./images/未命名作品(6).png',
+'./images/未命名作品(7).png',
+'./images/未命名作品(8).png',
+'./images/未命名作品(9).png',
+'./images/未命名作品(10).png',
+'./images/未命名作品(11).png',
+'./images/未命名作品(12).png'];  
+       var index=0;  
+       var info=document.getElementById("info");  
+     
+  
+       prev.onclick=function(){  
+           index--;  
+           if(index<0){  
+               index=imgArr.length -1;  
+           }  
+           document.getElementById("xz").src=imgArr[index];  
+          
+       } ;  
+       next.onclick=function(){  
+           index++;  
+           if(index>imgArr.length -1){  
+               index=0;  
+           }  
+           document.getElementById("xz").src=imgArr[index];  
+        
+       };  
+        
+    }  
+    function newLocation(){
+            window.location="./个人助理.html"
+        }
+        function bling(No){
+           document.getElementsByTagName("img")[No].src="./images/flower2.png"
+        }
+        function Nobling(No){
+           document.getElementsByTagName("img")[No].src="./images/flower.png"
+       }
+    </script>  
+</head>  
+  
+
+
+<body>  
+    <div class="box">  
+        <p id="info"></p> <img id="prev" src="./images/左.png" width="100px" height="100px"></img>     
+        <img id="xz"src="./images/未命名作品(1).png" alt="yhy" width="800" height="500">  
+        <img id="next" src="./images/右.png" width="100px" height="100px"></img>   
+    </div>       
+    <div id="parent">
+        <video autoplay loop muted><!--autoplay loop muted自动播放 循环播放 无声播放 -->
+        <source src="./video/First Love - Joe Hisaishi.mp4" type="video/mp4"/>
+        Your browser does not support the video tag.
+        </video>
+    </div>
+    <div id="return">
+        <a href="#" onclick="newLocation()"  onmouseover="bling(3)" onmouseout="Nobling(3)">
+        <img id="pic" src="./images/flower.png"  onmouseover="bling(3)" onmouseout="Nobling(3)">
+        <div id="inpic">返回</div></a>
+    </div>
+</body>  
+  
+</html>  

@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>翻牌游戏</title>
+
+<link href="style/layout.css" type="text/css" rel="stylesheet" />
+<link href="style/findpair.css" type="text/css" rel="stylesheet" />
+<script src="js/findpair.js" type="text/javascript"></script>
+
+<!--弹层插件-->
+<link href="style/xtiper.css" type="text/css" rel="stylesheet" />
+<script src="js/xtiper.js" type="text/javascript"></script>
+<style>
+  
+  video{  
+            position: fixed;  
+            right: 0px;  
+            bottom: 0px;  
+            min-width: 100%;  
+            min-height: 100%;  
+            width: 100%;
+            height: 100%;  
+            object-fit: fill;
+            /*加滤镜*/
+            /*filter: blur(15px); //背景模糊设置 */
+            /*-webkit-filter: grayscale(100%);*/  
+            /*filter:grayscale(100%); //背景灰度设置*/  
+            z-index:-11;
+            
+        }  
+        #parent{
+            width:100%;
+            height:100%;
+            position: fixed;
+            bottom:0;
+        }
+        a{
+            opacity: 0.9;
+            text-decoration: none;
+            font-family: "隶书";
+            font-size: 20px;
+            color:rgb(61, 63, 194);
+           
+        }
+        a:hover{
+            color: rgb(7, 127, 197);
+        }      
+        #return{
+            position: fixed;
+            right: 0;
+            bottom: 0;
+           margin-right: 50px;
+           margin-bottom: 390px;
+           z-index:  999;
+        }
+        #pic{
+            position: relative;
+            width: 140px;
+            height: 100px;
+        }
+        #inpic{
+            position: absolute;
+            top:35%;
+            left:40%;
+            text-align: center;
+            line-height: 20px;
+        }
+ 
+        h{
+          font-family: "隶书";
+          color: white;
+        }
+        h:hover{
+          color:  rgb(248, 213, 241);
+        }
+      select{
+        font-family: "隶书";
+          color: rgb(38, 111, 160);
+      }
+      #newgbutton{
+        border: none;
+            border-radius: 30px;
+        
+    background: -moz-linear-gradient(left,  #dea3e4 0%, #3451b3 50%, #7891e4 100%); 
+    background: -webkit-linear-gradient(left, #dea3e4 0%, #3451b3 50%, #7891e4);
+    background: -o-linear-gradient(left,#dea3e4 0%, #3451b3 50%, #7891e4);
+    background: -ms-linear-gradient(left, #dea3e4 0%, #3451b3 50%, #7891e4);
+    background: linear-gradient(left, #dea3e4 0%, #3451b3 50%, #7891e4);
+      }
+</style>
+</head>
+<body>
+  <div id="return">
+    <a href="#" onclick="newLocation()"  onmouseover="bling(0)" onmouseout="Nobling(0)">
+    <img id="pic" src="./images/cloud.png"  onmouseover="bling(0)" onmouseout="Nobling(0)">
+    <div id="inpic">返回</div></a>
+</div>
+
+<div id="parent">
+    <video autoplay loop muted><!--autoplay loop muted自动播放 循环播放 无声播放 -->
+    <source src="./video/1k60fps.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+    </video>
+</div>
+<table class="ftable">
+  <tr><td><div id="fbox"></div></td></tr>
+</table>
+
+<div class="fbox_btn fbox_btn1">
+  <div class="outdiv"><h>游戏规则：翻开两个格子，如果图案一致则配对，将其挑出，如果图案不一致则盖回去，直到所有格子都配对完成，游戏结束。</h></div>
+</div>
+
+<div class="fbox_btn fbox_btn2">  
+  <div id="output"></div>
+  <select id="hard" class="hard_select" onchange="changehard()">
+    <option value="0"><h>--选择难度--</h></option>
+    <option value="debug"><h>debug 模式</h></option>
+    <option value="1"><h>难度1: 4x4</h></option>
+    <option value="2"><h>难度2: 6x6</h></option>
+    <option value="3"><h>难度3: 8x8</h></option>
+    <option value="4"><h>难度4: 10x10</h></option>
+  </select>
+  <div id="newg"><button id="newgbutton"onclick="changehard()" ><h>新游戏</h></button></div>
+</div>
+
+<script>
+//初始化
+fbox = new Findpair('fbox','output');
+
+//开始游戏
+fbox.newgame();
+
+//选择难度
+function changehard(obj)
+{
+  obj = document.getElementById("hard");
+  var index = obj.selectedIndex; // 选中索引
+  var result = obj.options[index].value; // 选中值
+  if(result==0){
+    result = fbox.hard ? fbox.hard : 1;
+  }
+
+  if(result){
+    //修改难度
+    fbox.set({
+      hard: result,
+    });
+
+    //开始游戏
+    fbox.newgame();
+  }
+}
+function newLocation(){
+            window.location="./个人助理.html"
+        }
+        function bling(No){
+           document.getElementsByTagName("img")[No].src="./images/cloud2.png"
+        }
+        function Nobling(No){
+           document.getElementsByTagName("img")[No].src="./images/cloud.png"
+       }
+</script>
+
+</body>
+</html>
